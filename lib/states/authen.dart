@@ -31,7 +31,7 @@ class _AuthenState extends State<Authen> {
       body: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Container(
-          decoration: AppConstant().radioBox(),
+          decoration: AppConstant().linearBox(),
           child: ListView(
             children: [
               Row(
@@ -78,7 +78,7 @@ class _AuthenState extends State<Authen> {
                                     user: userController.text, password: passwordController.text);
                               }
                             },
-                            gfButtonShape: GFButtonShape.square,
+                            gfButtonShape: GFButtonShape.pills,
                             gfButtonType: GFButtonType.solid,
                           ),
                         )
