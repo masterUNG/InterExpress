@@ -60,28 +60,17 @@ class _AuthenState extends State<Authen> {
                         const SizedBox(
                           height: 8,
                         ),
-                        SizedBox(
-                          width: 250,
-                          child: WidgetButton(
-                            label: 'Login',
-                            pressFunc: () {
-                              if ((userController.text.isEmpty) ||
-                                  (passwordController.text.isEmpty)) {
-                                //Have Space
-                                AppSnackBar(
-                                        title: 'Have Space ?',
-                                        message: 'Please Fill Every Blank')
-                                    .errorSnackBar();
-                              } else {
-                                //No Space
-                                AppService().checkAuthen(
-                                    user: userController.text, password: passwordController.text);
-                              }
+                        Obx(() {
+                          return CheckboxListTile(
+                            value: appController.rememberMe.value,
+                            onChanged: (value) {
+                              appController.rememberMe.value = value!;
                             },
-                            gfButtonShape: GFButtonShape.pills,
-                            gfButtonType: GFButtonType.solid,
-                          ),
-                        )
+                            title: const WidgetText(data: 'Remember Me'),
+                            controlAffinity: ListTileControlAffinity.leading,
+                          );
+                        }),
+                        loginButton()
                       ],
                     ),
                   ),
@@ -90,6 +79,30 @@ class _AuthenState extends State<Authen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  SizedBox loginButton() {
+    return SizedBox(
+      width: 250,
+      child: WidgetButton(
+        label: 'Login',
+        pressFunc: () {
+          if ((userController.text.isEmpty) ||
+              (passwordController.text.isEmpty)) {
+            //Have Space
+            AppSnackBar(
+                    title: 'Have Space ?', message: 'Please Fill Every Blank')
+                .errorSnackBar();
+          } else {
+            //No Space
+            AppService().checkAuthen(
+                user: userController.text, password: passwordController.text);
+          }
+        },
+        gfButtonShape: GFButtonShape.pills,
+        gfButtonType: GFButtonType.solid,
       ),
     );
   }
