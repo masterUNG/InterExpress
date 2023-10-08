@@ -8,20 +8,26 @@ class WidgetForm extends StatelessWidget {
     this.suffixWidget,
     this.obscure,
     this.textEditingController,
+    this.labelWidget,
   }) : super(key: key);
 
   final String? hint;
   final Widget? suffixWidget;
   final bool? obscure;
   final TextEditingController? textEditingController;
+  final Widget? labelWidget;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(height: 40,
+    return SizedBox(
+      height: 40,
       child: TextFormField(
         controller: textEditingController,
         obscureText: obscure ?? false,
-        decoration: InputDecoration(contentPadding: const EdgeInsets.symmetric(horizontal: 12,vertical: 4),
+        decoration: InputDecoration(
+          label: labelWidget,
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
           filled: true, fillColor: Colors.grey.shade200,
           // border: InputBorder.none,
           enabledBorder: OutlineInputBorder(

@@ -85,4 +85,27 @@ class AppService {
           .errorSnackBar();
     }
   }
+
+  Future<void> insertNewData({required Map<String, dynamic> map}) async {
+    String urlApi =
+        'https://dev-api-ismart.interexpress.co.th/Test/insert-data';
+
+    Dio dio = Dio();
+    dio.options.headers['Content-Type'] = 'application/json';
+    dio.options.headers['Authorization'] =
+        'Bearer ${appController.tokenModels.last.accessToken}';
+
+    try {
+      var response = await dio.post(urlApi, data: map);
+
+      Get.back();
+
+      AppSnackBar(title: 'Add New Data Success', message: 'Thankyou')
+          .normalSnackBar();
+      
+    } on Exception catch (e) {
+      AppSnackBar(title: 'Cannot Add New Data', message: 'Please Try Again')
+          .errorSnackBar();
+    }
+  }
 }
