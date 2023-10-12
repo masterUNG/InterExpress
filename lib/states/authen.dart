@@ -38,7 +38,7 @@ class _AuthenState extends State<Authen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: 250,
+                    width: 260,
                     child: Column(
                       children: [
                         const SizedBox(
