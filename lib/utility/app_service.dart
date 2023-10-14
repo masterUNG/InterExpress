@@ -134,6 +134,10 @@ class AppService {
         var result = value.data;
         print('#15oct resutl ===> $result');
 
+        if (appController.dataModels.isNotEmpty) {
+          appController.dataModels.clear();
+        }
+
         for (var element in result) {
           DataModel dataModel = DataModel.fromMap(element);
           appController.dataModels.add(dataModel);
@@ -145,5 +149,20 @@ class AppService {
         Get.offAllNamed('/authen');
       });
     }
+  }
+
+  Future<void> processUpdateData({required Map<String, dynamic> map}) async {
+    String urlApi =
+        'https://dev-api-ismart.interexpress.co.th/Test/update-data';
+
+    Dio dio = Dio();
+    dio.options.headers['Content-Type'] = 'application/json';
+    dio.options.headers['Authorization'] =
+        'Bearer ${appController.tokenModels.last.accessToken}';
+
+    await dio.put(urlApi, data: map).then((value) {
+      Get.back();
+      AppSnackBar(title: 'Edit Sucess', message: 'ThankYou').normalSnackBar();
+    }).catchError((onError) {});
   }
 }

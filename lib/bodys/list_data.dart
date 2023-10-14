@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ielproject/states/add_new_data.dart';
+import 'package:ielproject/states/edit_data.dart';
 import 'package:ielproject/utility/app_controller.dart';
 import 'package:ielproject/utility/app_dialog.dart';
 import 'package:ielproject/utility/app_service.dart';
@@ -36,7 +37,18 @@ class _ListDataState extends State<ListData> {
                   onTap: () {
                     AppDialog().normalDialog(
                         title: appController.dataModels[index].employeeNo,
-                        contentWidget: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                        actionWidget: WidgetButton(
+                          label: 'Edit',
+                          pressFunc: () {
+                            Get.back();
+                            Get.to(EditData(
+                                    dataModel: appController.dataModels[index]))
+                                ?.then((value) =>
+                                    AppService().processReadAllData());
+                          },
+                        ),
+                        contentWidget: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             displayValue(
@@ -218,7 +230,9 @@ class _ListDataState extends State<ListData> {
       }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(const AddNewData());
+          Get.to(const AddNewData())?.then((value) {
+            AppService().processReadAllData();
+          });
         },
         child: const Icon(Icons.add),
       ),

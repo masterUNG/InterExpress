@@ -9,6 +9,7 @@ class WidgetForm extends StatelessWidget {
     this.obscure,
     this.textEditingController,
     this.labelWidget,
+    this.changeFunc,
   }) : super(key: key);
 
   final String? hint;
@@ -16,12 +17,13 @@ class WidgetForm extends StatelessWidget {
   final bool? obscure;
   final TextEditingController? textEditingController;
   final Widget? labelWidget;
+  final Function(String)? changeFunc;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 40,
-      child: TextFormField(
+      child: TextFormField(onChanged: changeFunc,
         controller: textEditingController,
         obscureText: obscure ?? false,
         decoration: InputDecoration(
