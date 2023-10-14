@@ -112,6 +112,9 @@ class AppService {
   }
 
   Future<void> processReadAllData() async {
+    
+    appController.load.value = true;
+
     String urlApi = 'https://dev-api-ismart.interexpress.co.th/Test/list-all';
 
     if (appController.tokenModels.isEmpty) {
@@ -131,6 +134,9 @@ class AppService {
           'Bearer ${appController.tokenModels.last.accessToken}';
 
       await dio.get(urlApi).then((value) {
+
+        appController.load.value = false;
+
         var result = value.data;
         print('#15oct resutl ===> $result');
 
@@ -164,5 +170,23 @@ class AppService {
       Get.back();
       AppSnackBar(title: 'Edit Sucess', message: 'ThankYou').normalSnackBar();
     }).catchError((onError) {});
+  }
+
+  Future<void> processDeleteData({required int id}) async {
+    String urlApi =
+        'https://dev-api-ismart.interexpress.co.th/Test/delete-data';
+
+    Map<String, dynamic> map = {};
+    map['Id'] = id;
+
+    Dio dio = Dio();
+    dio.options.headers['Content-Type'] = 'application/json';
+    dio.options.headers['Authorization'] =
+        'Bearer ${appController.tokenModels.last.accessToken}';
+
+    await dio
+        .delete(urlApi, data: map)
+        .then((value) => AppService().processReadAllData())
+        .catchError((onError) {});
   }
 }
