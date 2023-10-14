@@ -11,6 +11,7 @@ class AppDialog {
     String? pathImage,
     Widget? contentWidget,
     Widget? actionWidget,
+    Widget? secondActionWidget,
   }) {
     Get.dialog(
       AlertDialog(
@@ -23,7 +24,7 @@ class AppDialog {
         content: contentWidget,
         actions: [
           actionWidget ?? const SizedBox(),
-          actionWidget == null
+          secondActionWidget ?? (actionWidget == null
               ? WidgetButton(
                   gfButtonType: GFButtonType.transparent,
                   label: 'OK',
@@ -37,7 +38,7 @@ class AppDialog {
                   pressFunc: () {
                     Get.back();
                   },
-                ),
+                )),
         ],
       ),
       barrierDismissible: false,
