@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:geolocator/geolocator.dart';
@@ -12,6 +13,8 @@ import 'package:ielproject/utility/app_dialog.dart';
 import 'package:ielproject/utility/app_snackbar.dart';
 import 'package:ielproject/widgets/widget_button.dart';
 import 'package:ielproject/widgets/widget_text.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AppService {
   AppController appController = Get.put(AppController());
@@ -248,4 +251,26 @@ class AppService {
           },
         ));
   }
+
+  Future<void> processOpenUrl({required String url}) async {
+    final Uri uri = Uri.parse(url);
+    await canLaunchUrl(uri) ? await launchUrl(uri) : throw 'Cannot Launch';
+  }
+
+  Future<void> processTakePhoto() async {
+    await ImagePicker()
+        .pickImage(
+      source: ImageSource.camera,
+      maxWidth: 800,
+      maxHeight: 800,
+    )
+        .then((value) {
+      if (value != null) {
+        File file = File(value.path);
+        appController.files.add(file);
+      }
+    });
+  }
+
+  
 }

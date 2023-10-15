@@ -32,20 +32,19 @@ class _ShowMapState extends State<ShowMap> {
 
     if (GetPlatform.isAndroid) {
       BitmapDescriptor.fromAssetImage(
-            const ImageConfiguration(size: Size(48, 48)),
-            'images/pickup128.png')
-        .then((value) {
-      pickUpIcon = value;
-    });
+              const ImageConfiguration(size: Size(48, 48)),
+              'images/pickup128.png')
+          .then((value) {
+        pickUpIcon = value;
+      });
     }
 
     if (GetPlatform.isIOS) {
-       BitmapDescriptor.fromAssetImage(
-            const ImageConfiguration(size: Size(48, 48)),
-            'images/pickup.png')
-        .then((value) {
-      pickUpIcon = value;
-    });
+      BitmapDescriptor.fromAssetImage(
+              const ImageConfiguration(size: Size(48, 48)), 'images/pickup.png')
+          .then((value) {
+        pickUpIcon = value;
+      });
     }
 
     AppService().processFindPosition().then((value) {
@@ -76,7 +75,7 @@ class _ShowMapState extends State<ShowMap> {
       );
       map[markerId] = marker;
 
-      MarkerId friendMarkerId = MarkerId('friend');
+      MarkerId friendMarkerId = const MarkerId('friend');
       Marker friendMarker = Marker(
         markerId: friendMarkerId,
         position: latLng1,
@@ -88,7 +87,12 @@ class _ShowMapState extends State<ShowMap> {
                 title: 'สถานีเติ่มน้ำมัน',
                 actionWidget: WidgetButton(
                   label: 'หาเส้นทางไปที่นี่',
-                  pressFunc: () {},
+                  pressFunc: () {
+                    Get.back();
+                    String url =
+                        'https://www.google.com/maps/search/?api=1&query=${latLng1.latitude},${latLng1.longitude}';
+                    AppService().processOpenUrl(url: url);
+                  },
                 ));
           },
         ),

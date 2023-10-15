@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:ielproject/bodys/list_data.dart';
 import 'package:ielproject/bodys/show_map.dart';
+import 'package:ielproject/states/read_qr_code.dart';
 import 'package:ielproject/utility/app_controller.dart';
 import 'package:ielproject/utility/app_dialog.dart';
 import 'package:ielproject/widgets/widget_button.dart';
@@ -69,6 +70,12 @@ class _MainHomeState extends State<MainHome> {
   AppBar mainAppBar() {
     return AppBar(
       actions: [
+        WidgetIconButton(
+          iconData: Icons.qr_code,
+          pressFunc: () {
+            Get.to(const ReadQrCode());
+          },
+        ),
         WidgetIconButton(
           iconData: Icons.exit_to_app,
           pressFunc: () {
