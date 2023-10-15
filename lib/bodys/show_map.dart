@@ -30,12 +30,23 @@ class _ShowMapState extends State<ShowMap> {
   void initState() {
     super.initState();
 
-    BitmapDescriptor.fromAssetImage(
+    if (GetPlatform.isAndroid) {
+      BitmapDescriptor.fromAssetImage(
             const ImageConfiguration(size: Size(48, 48)),
             'images/pickup128.png')
         .then((value) {
       pickUpIcon = value;
     });
+    }
+
+    if (GetPlatform.isIOS) {
+       BitmapDescriptor.fromAssetImage(
+            const ImageConfiguration(size: Size(48, 48)),
+            'images/pickup.png')
+        .then((value) {
+      pickUpIcon = value;
+    });
+    }
 
     AppService().processFindPosition().then((value) {
       print('position ====> ${appController.positions.last}');
