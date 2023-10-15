@@ -196,9 +196,32 @@ class AppService {
 
   Future<void> processFindPosition() async {
     bool locationService = await Geolocator.isLocationServiceEnabled();
+    LocationPermission locationPermission;
 
     if (locationService) {
       //Open Location
+      locationPermission = await Geolocator.checkPermission();
+
+      if (locationService == LocationPermission.deniedForever) {
+        //ไม่อนุญาติเลย
+        dialogOpenPermision();
+      } else {
+        //Away, One, Denied
+        if (locationPermission == LocationPermission.denied) {
+          locationPermission = await Geolocator.requestPermission();
+
+          if ((locationPermission != LocationPermission.always) &&
+              (locationPermission != LocationPermission.whileInUse)) {
+            dialogOpenPermision();
+          } else {
+            Position position = await Geolocator.getCurrentPosition();
+            appController.positions.add(position);
+          }
+        } else {
+          Position position = await Geolocator.getCurrentPosition();
+          appController.positions.add(position);
+        }
+      }
     } else {
       //Off Location
       AppDialog().normalDialog(
@@ -212,5 +235,17 @@ class AppService {
             },
           ));
     }
+  }
+
+  Future<void> dialogOpenPermision() async {
+    AppDialog().normalDialog(
+        title: 'Open Permision',
+        secondActionWidget: WidgetButton(
+          label: 'Open Permission',
+          pressFunc: () {
+            Geolocator.openAppSettings();
+            exit(0);
+          },
+        ));
   }
 }
