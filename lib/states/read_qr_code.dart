@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ielproject/utility/app_snackbar.dart';
-import 'package:ielproject/widgets/widget_text.dart';
 import 'package:scan/scan.dart';
 
 class ReadQrCode extends StatefulWidget {

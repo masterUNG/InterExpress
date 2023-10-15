@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -31,14 +33,14 @@ Future<void> main() async {
 
     if (data == null) {
       firstPage = '/authen';
-      runApp(MyApp());
+      runApp(const MyApp());
     } else {
       firstPage = '/mainHome';
 
       await AppService()
           .findTokenModel(user: data['user'], password: data['password']);
 
-      runApp(MyApp());
+      runApp(const MyApp());
     }
   });
 }

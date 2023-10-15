@@ -26,7 +26,7 @@ class AppConstant {
       gradient: RadialGradient(
         colors: [Colors.white, bgColor],
         radius: 1.0,
-        center: Alignment(-0.5, -0.5),
+        center: const Alignment(-0.5, -0.5),
       ),
     );
   }

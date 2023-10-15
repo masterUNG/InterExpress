@@ -128,10 +128,10 @@ class _AuthenState extends State<Authen> {
   Row displayLogoAppname() {
     return Row(
       children: [
-        WidgetImageAsset(
+        const WidgetImageAsset(
           size: 64,
         ),
-        SizedBox(
+        const SizedBox(
           width: 16,
         ),
         WidgetText(

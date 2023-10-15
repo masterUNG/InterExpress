@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 
-import 'package:ielproject/widgets/widget_text.dart';
 
 class WidgetButton extends StatelessWidget {
   const WidgetButton({

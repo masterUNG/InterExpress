@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -8,7 +10,6 @@ import 'package:ielproject/utility/app_service.dart';
 import 'package:ielproject/widgets/widget_button.dart';
 import 'package:ielproject/widgets/widget_map.dart';
 import 'package:ielproject/widgets/widget_process.dart';
-import 'package:ielproject/widgets/widget_text.dart';
 
 class ShowMap extends StatefulWidget {
   const ShowMap({super.key});
@@ -22,6 +23,7 @@ class _ShowMapState extends State<ShowMap> {
 
   Map<MarkerId, Marker> map = {};
 
+  // ignore: prefer_typing_uninitialized_variables
   var pickUpIcon;
 
   LatLng latLng1 = const LatLng(12.575194143938125, 99.95883305288028);

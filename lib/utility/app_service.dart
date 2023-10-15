@@ -1,5 +1,6 @@
+// ignore_for_file: avoid_print, unrelated_type_equality_checks, unused_local_variable
+
 import 'dart:io';
-import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:geolocator/geolocator.dart';
@@ -62,6 +63,7 @@ class AppService {
 
       print('tokenModel ---> ${tokenModel.toMap()}');
     } on Exception catch (e) {
+      print(e);
       AppSnackBar(title: 'Login False', message: 'Please Try Again')
           .errorSnackBar();
     }
@@ -93,6 +95,7 @@ class AppService {
 
       print('##14oct tokenModel ---> ${tokenModel.toMap()}');
     } on Exception catch (e) {
+      print(e);
       AppSnackBar(title: 'Login False', message: 'Please Try Again')
           .errorSnackBar();
     }
@@ -115,6 +118,7 @@ class AppService {
       AppSnackBar(title: 'Add New Data Success', message: 'Thankyou')
           .normalSnackBar();
     } on Exception catch (e) {
+      print(e);
       AppSnackBar(title: 'Cannot Add New Data', message: 'Please Try Again')
           .errorSnackBar();
     }
@@ -229,7 +233,7 @@ class AppService {
       //Off Location
       AppDialog().normalDialog(
           title: 'Off Location',
-          contentWidget: WidgetText(data: 'Please Open Location'),
+          contentWidget: const WidgetText(data: 'Please Open Location'),
           secondActionWidget: WidgetButton(
             label: 'Open Location',
             pressFunc: () async {
@@ -271,6 +275,4 @@ class AppService {
       }
     });
   }
-
-  
 }
